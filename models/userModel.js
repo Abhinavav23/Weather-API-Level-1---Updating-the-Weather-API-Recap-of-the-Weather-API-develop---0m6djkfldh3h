@@ -1,20 +1,38 @@
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 // Define the User Schema
+
 const userSchema = new mongoose.Schema(
   {
     // Define the 'username' field
     // 1) The data type of this field is a string
     // 2) This field is required
     // 3) Each username must be unique
+    username: {
+      type: String,
+      required: true,
+      unique: true
+    },
     // Define the 'email' field
     // email
     // 1) The data type of this field is a string
     // 2) This field is required
     // 3) Each email must be unique
+    email: {
+      type: String,
+      required: true,
+      unique: true
+    },
     // Define the 'password' field
     //  password
     // 1) The data type of this field is a string
     // 2) This field is required
     // 3) Password should be at least 8 characters long
+    password: {
+      type: String,
+      required: true,
+      minlength: 8
+    }
   },
   { timestamps: true } // Automatically generate 'createdAt' and 'updatedAt' timestamps
 );
@@ -28,4 +46,4 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('WeatherUser', userSchema);
